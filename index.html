@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Practice — Qualifying Conversation</title>
+<title>Practice — Qualifying Conversations</title>
 <style>
   body {
     font-family: -apple-system, system-ui, sans-serif;
@@ -15,34 +15,40 @@
     line-height: 1.55;
   }
   h1 { font-size: 1.6rem; margin-bottom: 8px; }
-  .sub { color: #6B675E; margin-bottom: 28px; }
-  .card {
+  .sub { color: #6B675E; margin-bottom: 32px; }
+  a.card {
+    display: block;
     background: #FBF3EE;
     border-radius: 12px;
-    padding: 18px 20px;
+    padding: 20px 22px;
     margin-bottom: 16px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #EADFD6;
   }
-  .card h2 { font-size: 1rem; margin: 0 0 6px; }
-  .card p { margin: 0; color: #444; font-size: 0.95rem; }
-  .widget-wrap { margin-top: 32px; }
+  a.card:hover { background: #F6E9E1; }
+  a.card h2 { font-size: 1.05rem; margin: 0 0 6px; }
+  a.card p { margin: 0; color: #55514A; font-size: 0.95rem; }
+  .go { display:inline-block; margin-top:10px; font-weight:600; color:#A8623C; font-size:0.95rem; }
+  .note { margin-top: 32px; font-size: 0.88rem; color: #6B675E; }
 </style>
 </head>
 <body>
-  <h1>Practice — Qualifying Conversation</h1>
-  <p class="sub">Talk to this like a real prospect on the phone. It'll play one of several real aesthetician business scenarios — practice your opener, push past vague answers, and ask both "what have you tried" and "why didn't that work." Say "how did I do" any time to get feedback.</p>
+  <h1>Practice — Qualifying Conversations</h1>
+  <p class="sub">Two ways to practice, both out loud. Pick whichever you want to work on. You can stop either one at any time by saying "how did I do" to get feedback.</p>
 
-  <div class="card">
-    <h2>You ask, it answers</h2>
-    <p>Run the script on it like a real call. It stays in character until you ask for feedback.</p>
-  </div>
-  <div class="card">
-    <h2>Want it reversed instead?</h2>
-    <p>Just ask: "can you ask me the questions instead" — it'll switch roles.</p>
-  </div>
+  <a class="card" href="prospect.html">
+    <h2>1. Practice on a prospect</h2>
+    <p>You make the call. It plays a real aesthetician business owner with a real problem — vague at first, so you have to ask properly to get anywhere. Practice your opener and pushing past a thin answer.</p>
+    <span class="go">Start &rarr;</span>
+  </a>
 
-  <div class="widget-wrap">
-    <elevenlabs-convai agent-id="agent_2901m1fzvdk8fzvte93eyf2rawrr"></elevenlabs-convai>
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-  </div>
+  <a class="card" href="interview.html">
+    <h2>2. Get interviewed</h2>
+    <p>The other way around. It runs the qualifying questions on you, so you can feel what a prospect feels being asked them. Good for hearing where the questions land and where they sting.</p>
+    <span class="go">Start &rarr;</span>
+  </a>
+
+  <p class="note">You'll need to allow microphone access when your browser asks. Headphones help — they stop it from hearing itself.</p>
 </body>
 </html>
