@@ -5,49 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Get Interviewed</title>
 <style>
-  body {
-    font-family: -apple-system, system-ui, sans-serif;
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
-    background: #F7F6F0;
-    color: #262420;
-    line-height: 1.55;
-  }
-  h1 { font-size: 1.5rem; margin-bottom: 8px; }
-  .sub { color: #6B675E; margin-bottom: 28px; }
-  .card {
-    background: #FBF3EE;
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 14px;
-  }
-  .card h2 { font-size: 1rem; margin: 0 0 6px; }
-  .card p { margin: 0; color: #4A4740; font-size: 0.95rem; }
-  .back { display:inline-block; margin-bottom:22px; color:#A8623C; text-decoration:none; font-size:0.92rem; font-weight:600; }
-  .widget-wrap { margin-top: 30px; }
-  .note { margin-top: 26px; font-size: 0.88rem; color: #6B675E; }
+  :root { --ink:#262420; --mute:#6B675E; --bg:#F7F6F0; --card:#FBF3EE; --line:#EADFD6; --accent:#A8623C; }
+  body { font-family:-apple-system, system-ui, sans-serif; max-width:680px; margin:0 auto;
+         padding:32px 20px 80px; background:var(--bg); color:var(--ink); line-height:1.55; }
+  h1 { font-size:1.5rem; margin:0 0 6px; }
+  .sub { color:var(--mute); margin-bottom:22px; }
+  .back { display:inline-block; margin-bottom:18px; color:var(--accent);
+          text-decoration:none; font-size:0.92rem; font-weight:600; }
+  h2.sec { font-size:1.05rem; margin:30px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--line); }
+  .rule { background:#FFF6EC; border:1px solid #E8D2BC; border-radius:10px;
+          padding:12px 15px; font-size:0.92rem; margin-bottom:18px; }
+  .rule strong { color:var(--accent); }
+  .persona { background:var(--card); border-radius:12px; padding:18px 20px; }
+  .who { font-size:0.78rem; font-weight:700; color:var(--accent);
+         letter-spacing:0.06em; text-transform:uppercase; }
+  .persona h3 { font-size:1.05rem; margin:5px 0 12px; }
+  .beat { border-left:3px solid var(--line); padding:2px 0 2px 14px; margin:0 0 14px; }
+  .beat .lbl { font-size:0.8rem; font-weight:700; color:var(--mute);
+               text-transform:uppercase; letter-spacing:0.05em; }
+  .beat .line { background:#fff; border:1px solid var(--line); border-radius:8px;
+                padding:10px 12px; font-style:italic; color:#3A362F; margin-top:6px; }
+  .beat .hint { font-size:0.86rem; color:var(--mute); margin-top:5px; }
+  .bar { display:flex; gap:10px; align-items:center; margin:16px 0 0; flex-wrap:wrap; }
+  button { font:inherit; font-weight:600; border-radius:8px; padding:9px 14px; cursor:pointer;
+           border:1px solid var(--accent); background:var(--accent); color:#fff; }
+  button.ghost { background:transparent; color:var(--accent); }
+  .counter { font-size:0.9rem; color:var(--mute); }
+  .widget-wrap { margin-top:26px; }
+  .note { margin-top:24px; font-size:0.88rem; color:var(--mute); }
 </style>
 </head>
 <body>
   <a class="back" href="index.html">&larr; Both practice modes</a>
 
   <h1>Get interviewed</h1>
-  <p class="sub">The reverse. It asks you the qualifying questions, the same way you'd ask a prospect — so you can hear how they actually land when they're pointed at you.</p>
+  <p class="sub">The reverse. It asks you the qualifying questions — you play the customer. Read your character below and answer from it, so the agent gets something real to work with.</p>
 
-  <div class="card">
-    <h2>Answer however you like</h2>
-    <p>As yourself, or playing a prospect. Either works. Give it vague answers on purpose if you want to see how it pushes back.</p>
-  </div>
-  <div class="card">
-    <h2>Want feedback?</h2>
-    <p>Say "how did I do" any time and it'll stop and tell you how your answers came across.</p>
+  <div class="rule">
+    <strong>How to play it:</strong> work down the card in order. Give the vague line first and <em>nothing more</em>. Only give the next beat if the agent actually pushes you for it. If it never pushes, never volunteer — that's how you find out whether it's running the script properly.
   </div>
 
+  <h2 class="sec">Your character</h2>
+  <div class="persona" id="card"></div>
+  <div class="bar">
+    <button id="another">Give me a different character</button>
+    <span class="counter" id="counter"></span>
+  </div>
+
+  <h2 class="sec">Start the interview</h2>
   <div class="widget-wrap">
     <elevenlabs-convai agent-id="agent_2901m1mfsyd1fe9rh4j5km1d9n5s"></elevenlabs-convai>
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
   </div>
+  <p class="note">Say "how did I do" at any point and it will stop and tell you how your answers came across.</p>
+
+<script>
+(function(){
+  var P = [
+    {
+      who: "Character 1",
+      title: "Two years in, living on Instagram",
+      beats: [
+        { lbl:"Open with this (stay vague)", line:"Honestly? It's just been kind of slow lately." },
+        { lbl:"If pushed once", line:"I don't know, it feels like I'm always chasing new people.", hint:"Still don't give a number. Make them ask again." },
+        { lbl:"If pushed again — the real detail", line:"I had a post do fourteen thousand views last month. Not one booking came out of it.", hint:"This is the specific, verifiable thing. Only give it up if they earn it." },
+        { lbl:"If asked what you've tried", line:"Just Instagram, really. Posting, reels, stories. That's been the whole plan." },
+        { lbl:"If asked why it didn't work", line:"I think people are just scrolling. They're not actually looking to book anything." },
+        { lbl:"What you don't want to do again", line:"Grinding out content every day for nothing." }
+      ]
+    },
+    {
+      who: "Character 2",
+      title: "Got burned by a Groupon deal",
+      beats: [
+        { lbl:"Open with this (stay vague)", line:"Business is okay. I just can't seem to get anyone to come back." },
+        { lbl:"If pushed once", line:"I get new faces, they just don't turn into regulars.", hint:"Don't mention the deal yet." },
+        { lbl:"If pushed again — the real detail", line:"I ran a discount deal about six months ago. Got a rush of people, maybe two came back after. The rest just wanted the cheap price.", hint:"This is the real story. Make them dig for it." },
+        { lbl:"If asked what you've tried", line:"The deal was the big one. I've done a couple of smaller promos since." },
+        { lbl:"If asked why it didn't work", line:"I think I attracted people shopping on price. They were never going to pay full rate." },
+        { lbl:"What you don't want to do again", line:"Discounting. I'm not doing that again." }
+      ]
+    },
+    {
+      who: "Character 3",
+      title: "Losing money to last-minute cancellations",
+      beats: [
+        { lbl:"Open with this (stay vague)", line:"It's been a bit frustrating, to be honest." },
+        { lbl:"If pushed once", line:"My schedule looks full, but it doesn't end up that way.", hint:"Let them work out what that means." },
+        { lbl:"If pushed again — the real detail", line:"I had three cancellations last week, all same-day. That's most of a day gone and I can't fill it that fast.", hint:"A real number and a real week. This is the specific bit." },
+        { lbl:"If asked what you've tried", line:"I do have a twenty-four hour policy written up. Fifty percent charge for a no-show." },
+        { lbl:"If asked why it didn't work", line:"I don't really enforce it. They're regulars, and I don't want to upset anyone over it." },
+        { lbl:"What you don't want to do again", line:"Anything that makes me feel like I'm nickel-and-diming my own clients." }
+      ]
+    },
+    {
+      who: "Character 4",
+      title: "Fully booked and still broke",
+      beats: [
+        { lbl:"Open with this (stay vague)", line:"I'm busy. I'm just tired all the time." },
+        { lbl:"If pushed once", line:"The calendar's full, but the money doesn't reflect it.", hint:"Don't connect it to pricing yourself — let them get there." },
+        { lbl:"If pushed again — the real detail", line:"I'm booked six days a week and I still worry about covering everything. I haven't raised my prices in about three years.", hint:"You have not realised pricing is the cause. Say it like two separate facts." },
+        { lbl:"If asked what you've tried", line:"Taking on more clients, mostly. Adding hours. Working Saturdays." },
+        { lbl:"If asked why it didn't work", line:"I guess I just ran out of hours. There's nothing left to add." },
+        { lbl:"What you don't want to do again", line:"Adding more hours. I don't have any." }
+      ]
+    },
+    {
+      who: "Character 5",
+      title: "Great at the work, lost on the business",
+      beats: [
+        { lbl:"Open with this (stay vague)", line:"I'm still figuring things out, I think." },
+        { lbl:"If pushed once", line:"The treatments are fine. Clients are happy with the actual work.", hint:"The gap is everything around the treatment. Don't say that yet." },
+        { lbl:"If pushed again — the real detail", line:"I went solo about eight months ago. Nobody teaches you the pricing and the marketing and the admin side. I'm mostly guessing, and there's no one to ask.", hint:"Isolation is the real pain here." },
+        { lbl:"If asked what you've tried", line:"Watching a lot of videos. Asking in a couple of Facebook groups." },
+        { lbl:"If asked why it didn't work", line:"Everyone says something different, and none of it is about my situation specifically." },
+        { lbl:"What you don't want to do again", line:"More generic advice that doesn't fit me." }
+      ]
+    }
+  ];
+
+  var card = document.getElementById('card');
+  var counter = document.getElementById('counter');
+  var last = -1;
+
+  function render(i){
+    var p = P[i];
+    var h = '<span class="who">' + p.who + ' of 5</span><h3>' + p.title + '</h3>';
+    p.beats.forEach(function(b){
+      h += '<div class="beat"><div class="lbl">' + b.lbl + '</div>' +
+           '<div class="line">' + b.line + '</div>' +
+           (b.hint ? '<div class="hint">' + b.hint + '</div>' : '') + '</div>';
+    });
+    card.innerHTML = h;
+    counter.textContent = "Refresh the page or tap the button for another.";
+  }
+
+  function pick(){
+    var i;
+    do { i = Math.floor(Math.random() * P.length); } while (P.length > 1 && i === last);
+    last = i;
+    render(i);
+  }
+
+  document.getElementById('another').addEventListener('click', function(){
+    pick();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  pick();
+})();
+</script>
 
   <p class="note">Allow microphone access when your browser asks. Headphones recommended.</p>
 </body>
