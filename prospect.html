@@ -36,6 +36,10 @@
   table.hist th, table.hist td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); }
   table.hist th { color:var(--mute); font-weight:600; }
   .widget-wrap { margin-top:26px; }
+  @media (max-width: 600px) {
+    .widget-wrap { max-height:280px; overflow-y:auto; }
+    .widget-wrap :is(elevenlabs-convai, iframe) { height:280px !important; }
+  }
   .note { margin-top:24px; font-size:0.88rem; color:var(--mute); }
 </style>
 </head>
